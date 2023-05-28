@@ -1,18 +1,16 @@
 {
-    "id": "yourName_uniqueid",
-    "name": "starsector-gradle-template",
-    "author": "Your Name",
-    "utility": "false",
-    "version": { "major":"1", "minor": "0", "patch": "0" },
-    "description": "Mod description.",
-    "gameVersion": "0.95.1a-RC6",
-    "jars":["jars/starsector-gradle-template.jar"],
-    "modPlugin":"com.example.ExampleModPlugin",
+    "id": "barbershop",
+    "name": "Barbershop",
+    "author": "frakern",
+    "utility": "true",
+    "version": { "major":"0", "minor": "1", "patch": "0" },
+    "description": "Change officer portraits.",
+    "gameVersion": "0.96a-RC9",
+    "jars":["jars/barbershop.jar"],
     "dependencies": [
         {
-            "id": "lw_lazylib",
-            "name": "LazyLib",
-            # "version": "2.6" # If a specific version or higher is required, include this line
+            "id": "lw_console",
+            "name": "Console Commands"
         }
     ]
 }

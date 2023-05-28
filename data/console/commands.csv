@@ -1,0 +1,2 @@
+command,class,tags,syntax,help
+barbershop,barbershop.data.console.BarbershopCommand,"campaign",barbershop <officer name> <sprite id>,Launch Barbershop
