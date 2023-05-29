@@ -13,6 +13,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/kotlinScripting.xml
+.idea/csv-plugin.xml
 
 # Generated files
 .idea/**/contentModel.xml
