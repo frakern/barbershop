@@ -3,7 +3,7 @@
     "name": "Barbershop",
     "author": "frakern",
     "utility": "true",
-    "version": { "major":"0", "minor": "2", "patch": "0" },
+    "version": { "major":"0", "minor": "2", "patch": "1" },
     "description": "Change officer portraits.",
     "gameVersion": "0.96a-RC9",
     "jars":["jars/barbershop.jar"],
