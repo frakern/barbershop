@@ -1,6 +1,7 @@
 package barbershop.data.console;
 
 import barbershop.helper.BarbershopUtil;
+import com.fs.starfarer.api.campaign.CharacterDataAPI;
 import org.jetbrains.annotations.NotNull;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.FullName;
@@ -76,40 +77,51 @@ public class BarbershopCommand implements BaseCommand {
         String nameSearch = builder.toString();
         PersonAPI selectedOfficer = null;
 
-        List<String> officerFullNames = new ArrayList<>();
-        List<String> officerLastNames = new ArrayList<>();
-        List<String> officerFirstNames = new ArrayList<>();
-        List<PersonAPI> officersList = BarbershopUtil.getOfficers();
-
-        for (PersonAPI person : officersList) {
-            FullName name = person.getName();
-            officerFullNames.add(name.getFullName());
-            officerLastNames.add(name.getLast());
-            officerFirstNames.add(name.getFirst());
-        }
-
-        String bestFullName = CommandUtils.findBestStringMatch(nameSearch, officerFullNames);
-        if (bestFullName != null) {
-            selectedOfficer = officersList.get(getStringIndexInList(bestFullName, officerFullNames));
+        if (nameSearch.equalsIgnoreCase("player")) {
+            selectedOfficer = Global.getSector().getPlayerPerson();
         }
         else {
-            String bestLastName = CommandUtils.findBestStringMatch(nameSearch, officerLastNames);
-            if (bestLastName != null) {
-                selectedOfficer = officersList.get(getStringIndexInList(bestLastName, officerLastNames));
+            List<String> officerFullNames = new ArrayList<>();
+            List<String> officerLastNames = new ArrayList<>();
+            List<String> officerFirstNames = new ArrayList<>();
+            List<PersonAPI> officersList = BarbershopUtil.getOfficers();
+
+            for (PersonAPI person : officersList) {
+                FullName name = person.getName();
+                officerFullNames.add(name.getFullName());
+                officerLastNames.add(name.getLast());
+                officerFirstNames.add(name.getFirst());
+            }
+
+            String bestFullName = CommandUtils.findBestStringMatch(nameSearch, officerFullNames);
+            if (bestFullName != null) {
+                selectedOfficer = officersList.get(getStringIndexInList(bestFullName, officerFullNames));
             }
             else {
-                String bestFirstName = CommandUtils.findBestStringMatch(nameSearch, officerFirstNames);
-                if (bestFirstName != null) {
-                    selectedOfficer = officersList.get(getStringIndexInList(bestFirstName, officerFirstNames));
+                String bestLastName = CommandUtils.findBestStringMatch(nameSearch, officerLastNames);
+                if (bestLastName != null) {
+                    selectedOfficer = officersList.get(getStringIndexInList(bestLastName, officerLastNames));
+                }
+                else {
+                    String bestFirstName = CommandUtils.findBestStringMatch(nameSearch, officerFirstNames);
+                    if (bestFirstName != null) {
+                        selectedOfficer = officersList.get(getStringIndexInList(bestFirstName, officerFirstNames));
+                    }
                 }
             }
         }
+
         if (selectedOfficer == null) {
             Console.showMessage("Unable to find officer with name " + nameSearch);
             return CommandResult.ERROR;
         }
 
         selectedOfficer.setPortraitSprite(spriteID);
+
+        if (nameSearch.equalsIgnoreCase("player")) {
+            CharacterDataAPI characterData = Global.getSector().getCharacterData();
+            characterData.setPortraitName(spriteID);
+        }
 
         Console.showMessage("Changed portrait sprite for " + selectedOfficer.getName().getFullName());
 

@@ -1,10 +1,10 @@
 {
     "masterVersionFile": "https://raw.githubusercontent.com/frakern/barbershop/master/assets/barbershop.version",
     "modName": "Barbershop",
-    "modThreadId": 26969,
+    "modThreadId": 27052,
     "modVersion": {
         "major": 0,
-        "minor": 1,
+        "minor": 2,
         "patch": 0
     },
     "directDownloadURL": "https://github.com/frakern/barbershop/releases/latest"
